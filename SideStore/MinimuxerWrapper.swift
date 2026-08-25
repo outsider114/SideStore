@@ -240,7 +240,7 @@ extension MinimuxerError {
         case .noConnection:
             return NSLocalizedString("You do not appear to be connected to Wi-Fi or a wired network connection! Please connect to a Wi-Fi or wired connection.", comment: "")
         case .noVPN(let reason):
-            return String(format: NSLocalizedString("Unable to connect to the device via %@ VPN. Please make sure LocalDevVPN is enabled and running! Reason: %@", comment: ""), "LocalDev", reason)
+            return String(format: NSLocalizedString("Unable to connect to the device through the TUFLab network path. Reason: %@", comment: ""), reason)
         case .pairingFile(let proto, let reason):
             return String(format: NSLocalizedString("Invalid pairing file (%@ protocol): %@. Please use iloader to replace it.", comment: ""), proto.description, reason)
         case .createDebug:

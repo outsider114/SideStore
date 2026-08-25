@@ -224,7 +224,7 @@ struct OperationError: ALTLocalizedError {
             let appName = self.appName ?? NSLocalizedString("The app", comment: "")
             return String(format: NSLocalizedString("SideStore was denied permission to launch %@.", comment: ""), appName)
         case .noConnection: return NSLocalizedString("You do not appear to be connected to Wi-Fi, Bridge or a Wired network connection!\n\nPlease connect to a Wi-Fi, Bridge or Wired connection before attempting futher operations", comment: "")
-        case .noVPN: return NSLocalizedString("You do not appear to be connected to VPN.\n\nPlease make sure LocalDevVPN is connected and running! If the issue persists, replace your pairing with iloader or try restarting the device.", comment: "")
+        case .noVPN: return NSLocalizedString("The TUFLab device endpoint is unavailable.\n\nConnect to the home network or enable the TUFLab WireGuard tunnel, then try again. If the issue persists, replace your pairing with iloader.", comment: "")
         case .invalidPairingFile: return NSLocalizedString("The current pairing file is invalid or missing.\n\nPlease make sure to input a valid pairing file! If the issue persists, replace your pairing with iloader.", comment: "")
         case .tooNewError: return NSLocalizedString("iOS 17.0-17.3.1 changed how JIT is enabled so SideStore cannot enable JIT without SideJITServer on these versions, sorry for any inconvenience.", comment: "")
         case .unableToConnectSideJIT: return NSLocalizedString("Unable to connect to SideJITServer. Please check that you are on the same Wi-Fi of and your Firewall has been set correctly on your server.", comment: "")
@@ -277,7 +277,7 @@ struct OperationError: ALTLocalizedError {
         switch self.code
         {
         case .noConnection: return NSLocalizedString("Connect to a Wi-Fi network, Bridge or a Wired network connection!", comment: "")
-        case .noVPN: return NSLocalizedString("Make sure LocalDevVPN is connected and running!", comment: "")
+        case .noVPN: return NSLocalizedString("Connect to the home network or enable the TUFLab WireGuard tunnel.", comment: "")
         case .invalidPairingFile: return NSLocalizedString("Import a valid mobiledevicepairing file.", comment: "")
         case .serverNotFound: return NSLocalizedString("Make sure you're on the same Wi-Fi network as a computer running AltServer, or try connecting this device to your computer via USB.", comment: "")
         case .maximumAppIDLimitReached:

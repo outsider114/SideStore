@@ -1,12 +1,12 @@
 #sidestore dependencies
 [submodule "Dependencies/minimuxer"]
     path = Dependencies/minimuxer
-    url = https://github.com/SideStore/minimuxer
-    branch = develop
+    url = https://github.com/nlaygb/minimuxer
+    branch = tuflab/0.6.4-reflector
 [submodule "Dependencies/em_proxy"]
 	path = Dependencies/em_proxy
-	url = https://github.com/SideStore/em_proxy
-    branch = develop
+	url = https://github.com/nlaygb/em_proxy
+    branch = tuflab/build-assets
 
 [submodule "Dependencies/AltSign"]
     path = Dependencies/AltSign
