@@ -106,6 +106,19 @@ func minimuxerStart(_ pairingFile: String, mountPath: String) async throws {
     await bindTunnelConfig()
     await Minimuxer.network.start()
     #else
+    if UserDefaults.standard.enableEMPforWireguard {
+        startEMProxy(bind_addr: AppConstants.Proxy.serverURL)
+
+        // EMP binds on a worker thread. Starting minimuxer first races that bind and
+        // makes a valid 10.7.0.1 peer look unavailable until the next app launch.
+        for _ in 0..<30 {
+            if Minimuxer.shared.testDeviceConnection(ifaddr: MinimuxerConstants.deviceEndpoint) {
+                break
+            }
+            try await Task.sleep(nanoseconds: 100_000_000)
+        }
+    }
+
     await bindTunnelConfig()
     debugLog("[SideStore] minimuxerStart(pairingFile) invoked")
     try await Minimuxer.shared.start(pairingFile: pairingFile, mountPath: mountPath)
