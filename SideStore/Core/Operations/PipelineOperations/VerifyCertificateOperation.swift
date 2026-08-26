@@ -73,7 +73,10 @@ final class VerifyCertificateOperation: BasePipelineOperation<AppOperationContex
                 guard let appBundle = self.context.targetAppBundle else {
                     throw OperationError.invalidParameters("VerifyCertificateOperation: targetAppBundle is missing in context.")
                 }
-                guard let binaryCert = CertificateManager.shared.getSigningCertificate(at: appBundle.fileURL) else {
+                guard let binaryCert = CertificateManager.shared.getSigningCertificate(at: appBundle.fileURL)
+                ?? self.context.overrideCertificate?.x509
+                    ?? CertificateManager.shared.activeCertificate?.certificate.x509
+                else {
                     throw OperationError.invalidParameters("Could not locate signing certificate for '\(appName)'.")
                 }
                 
