@@ -1684,6 +1684,7 @@ private extension MyAppsViewController
 
     private func presentImportDialog(for url: URL)
     {
+        let isTUFLabUpdate = url.isTUFLabUpdateHandoff
         let cleanup = {
             guard url.isFileURL else { return }
             do
@@ -1695,15 +1696,35 @@ private extension MyAppsViewController
                 debugLog("Unable to remove imported .ipa. \(error)")
             }
         }
+
+        let install = { [weak self] in
+            guard let self else {
+                cleanup()
+                return
+            }
+            if isTUFLabUpdate {
+                // Intentional: this is the existing "Register App ID for Each Extension" path.
+                UserDefaults.standard.customizeAppExtensions = false
+            }
+            self.sideloadApp(at: url) { result in
+                cleanup()
+                guard isTUFLabUpdate,
+                      case .success = result,
+                      let returnURL = URL(string: "tuflab://app/about")
+                else { return }
+                UIApplication.shared.open(returnURL)
+            }
+        }
+
+        guard !isTUFLabUpdate else {
+            install()
+            return
+        }
         
         InstallAppDialog.present(
             ipaURL: url,
             from: self,
-            onConfirm: { [weak self] in
-                self?.sideloadApp(at: url) { _ in
-                    cleanup()
-                }
-            },
+            onConfirm: install,
             onCancel: {
                 cleanup()
             }
