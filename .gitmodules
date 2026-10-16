@@ -1,11 +1,11 @@
 #sidestore dependencies
 [submodule "Dependencies/minimuxer"]
     path = Dependencies/minimuxer
-    url = https://github.com/nlaygb/minimuxer
+    url = https://github.com/outsider114/minimuxer
     branch = tuflab/20260825-wireguard
 [submodule "Dependencies/em_proxy"]
     path = Dependencies/em_proxy
-    url = https://github.com/nlaygb/em_proxy
+    url = https://github.com/outsider114/em_proxy
     branch = tuflab/v0.9.2-keys
 [submodule "Dependencies/AltSign"]
     path = Dependencies/AltSign
